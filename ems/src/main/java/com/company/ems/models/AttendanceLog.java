@@ -12,6 +12,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AttendanceLog {
       @Id
     @GeneratedValue(strategy = GenerationType.UUID)
