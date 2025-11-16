@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.company.ems.models.enums.AttendanceStatus;
+
 import jakarta.persistence.*;
 import lombok.*; 
 
@@ -31,5 +33,8 @@ public class AttendanceLog {
      @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shift_id")
     private Shift shift;
+
+    @Enumerated(EnumType.STRING)
+    private AttendanceStatus status; 
     
 }

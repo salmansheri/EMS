@@ -18,6 +18,7 @@ import com.company.ems.Repositories.AttendanceLogRepository;
 import com.company.ems.Repositories.EmployeeRepository;
 import com.company.ems.Repositories.ShiftRepository;
 import com.company.ems.models.AttendanceLog;
+import com.company.ems.models.enums.AttendanceStatus;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -88,6 +89,15 @@ public class AttendanceService {
                  attendanceLog.getCheckIn().toLocalTime().toSecondOfDay()) / 3600;
 
             attendanceLog.setTotalHours(hours);
+
+            // Status Logic
+            if (hours >= 9) {
+                attendanceLog.setStatus(AttendanceStatus.PRESENT);
+            } else if (hours >= 4) {
+                attendanceLog.setStatus(AttendanceStatus.HALF_DAY);
+            } else {
+                attendanceLog.setStatus(AttendanceStatus.ABSENT);
+            }
 
             attendanceLogRepository.save(attendanceLog); 
 
